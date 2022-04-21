@@ -16,8 +16,8 @@ export async function getStaticProps(context) {
 }
 
 export default function Home(props) {
-  console.log(props);
-  function handleOnBannerBtnClick() {
+  /*   console.log(props);
+   */ function handleOnBannerBtnClick() {
     console.log("Click");
   }
   /*   const name = "Coffee Shop";
@@ -40,9 +40,8 @@ export default function Home(props) {
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
         </div>
+          <h2 className={styles.heading2}>Stores near me</h2>{" "}
         <div className={styles.cardLayout}>
-          {/*           <h2>Stores near me</h2>
-           */}{" "}
           {props.data.map((coffeeStores, i) => {
             return (
               <Card
