@@ -6,14 +6,24 @@ import Banner from "../components/banner/banner";
 import Card from "../components/card/card";
 import coffeeStores from "../data/coffee-stores.json";
 
-export default function Home() {
+export async function getStaticProps(context) {
+  const data = coffeeStores;
+  return {
+    props: {
+      data,
+    }, //will be passed to the page component as props
+  };
+}
+
+export default function Home(props) {
+  console.log(props);
   function handleOnBannerBtnClick() {
     console.log("Click");
   }
-  const name = "Coffee Shop";
+  /*   const name = "Coffee Shop";
   const href = "Dynamic Shop";
-  const imageUrl = "/static/coffee-shop.jpeg";
-  console.log("styles on home", styles.container);
+  const imageUrl = "/static/coffee-shop.jpeg"; 
+  console.log("styles on home", styles.container); */
   return (
     <div className={styles.container}>
       <Head>
@@ -33,17 +43,19 @@ export default function Home() {
         <div className={styles.cardLayout}>
           {/*           <h2>Stores near me</h2>
            */}{" "}
-          {coffeeStores.map((coffeeStores) => {
+          {props.data.map((coffeeStores, i) => {
             return (
               <Card
+                key={props.data[i].id}
                 className={styles.card}
-                name={coffeeStores.name}
-                href={`${coffeeStores.id}`}
-                imageUrl={coffeeStores.imgUrl}
+                name={props.data[i].name}
+                href={`${props.data[i].id}`}
+                imageUrl={props.data[i].imgUrl}
               />
             );
           })}
         </div>
+        <div>{console.log(props.data[0])}</div>
       </main>
     </div>
   );
