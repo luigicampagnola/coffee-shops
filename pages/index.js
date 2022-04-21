@@ -3,12 +3,16 @@ import Image from "next/image";
 import styles from "../styles/Home.module.css";
 import Link from "next/link";
 import Banner from "../components/banner/banner";
+import Card from "../components/card/card";
+import coffeeStores from "../data/coffee-stores.json";
 
 export default function Home() {
   function handleOnBannerBtnClick() {
     console.log("Click");
   }
-
+  const name = "Coffee Shop";
+  const href = "Dynamic Shop";
+  const imageUrl = "/static/coffee-shop.jpeg";
   console.log("styles on home", styles.container);
   return (
     <div className={styles.container}>
@@ -25,6 +29,20 @@ export default function Home() {
         />
         <div className={styles.heroImage}>
           <Image src="/static/hero-image.png" width={700} height={400} />
+        </div>
+        <div className={styles.cardLayout}>
+          {/*           <h2>Stores near me</h2>
+           */}{" "}
+          {coffeeStores.map((coffeeStores) => {
+            return (
+              <Card
+                className={styles.card}
+                name={coffeeStores.name}
+                href={`${coffeeStores.id}`}
+                imageUrl={coffeeStores.imgUrl}
+              />
+            );
+          })}
         </div>
       </main>
     </div>
