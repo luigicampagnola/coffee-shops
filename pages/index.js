@@ -44,7 +44,7 @@ export default function Home(props) {
           <>
             <h2 className={styles.heading2}>Stores near me</h2>{" "}
             <div className={styles.cardLayout}>
-              {props.coffeeStores.map((eachCoffeeStore, i) => {
+              {props.coffeeStores.map((eachCoffeeStores, i) => {
                 return (
                   <Card
                     key={props.coffeeStores[i].id}
