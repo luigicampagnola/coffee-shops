@@ -38,7 +38,8 @@ export function getStaticPaths() {
   };
 }
 
-export default function Shops() {
+export default function Shops(props) {
+  console.log("props", props)
   const router = useRouter();
   console.log("router", router);
   return (
@@ -52,6 +53,11 @@ export default function Shops() {
           <button>Go Back</button>
         </a>
       </Link>
+      <p>{props.coffeeStore.name}</p>
+      <p>{props.coffeeStore.address}</p>
+      <p>{props.coffeeStore.neighbourhood}</p>
+
+
     </div>
   );
 }
