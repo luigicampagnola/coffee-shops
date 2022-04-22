@@ -1,7 +1,9 @@
+import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import { useRouter } from "next/router";
 import styles from "../../styles/coffee-store.module.css";
+import cls from "classnames";
 
 import coffeeStoreData from "../../data/coffee-stores.json";
 
@@ -39,23 +41,50 @@ export default function Shops(props) {
   if (router.isFallback) {
     return <div>Loading..</div>;
   }
-  const { address, name, neighbourhood } = props.coffeeStore; // destructured props
+  const { address, name, neighbourhood, imgUrl } = props.coffeeStore;
+
+  function handleUpvoteButton() {
+    console.log("click");
+  }
+
   return (
     <div className={styles.layout}>
       <Head>
         <title>{name}</title>
       </Head>
-      <Link href="/">
-        <a>
-          <button>Go Back</button>
-        </a>
-      </Link>
       <div className={styles.container}>
-        <div className={styles.nameWrapper}>
-          <p className={styles.name}>{name}</p>
+        <div className={styles.col1}>
+          <Link href="/">
+            <a>Back to home</a>
+          </Link>
+          <div className={styles.nameWrapper}>
+            <p className={styles.name}>{name}</p>
+            <Image
+              src={imgUrl}
+              width={600}
+              height={360}
+              className={styles.storeImg}
+              alt={name}
+            />
+          </div>
         </div>
-        <p className={styles.text}>{address}</p>
-        <p className={styles.text}>{neighbourhood}</p>
+        <div className={cls("glass", styles.col2)}>
+          <div className={styles.iconWrapper}>
+            <Image src="/static/icons/places.svg" width={24} height={24} />
+            <p className={styles.text}>{address}</p>
+          </div>
+          <div className={styles.iconWrapper}>
+            <Image src="/static/icons/nearMe.svg" width={24} height={24} />
+            <p className={styles.text}>{neighbourhood}</p>
+          </div>
+          <div className={styles.iconWrapper}>
+            <Image src="/static/icons/star.svg" width={24} height={24} />
+            <p className={styles.text}>2</p>
+          </div>
+          <button className={styles.upvoteButton} onClick={handleUpvoteButton}>
+            Up vote
+          </button>
+        </div>
       </div>
     </div>
   );
